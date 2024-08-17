@@ -176,51 +176,56 @@ class _AccountPageState extends State<AccountPage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Profile')),
       drawer: Drawer(
+        child: _loading
+            ? const Center(child: CircularProgressIndicator.adaptive())
+            : ListView(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
+                children: [
+                  Avatar(
+                    imageUrl: _avatarUrl,
+                    onUpload: _onUpload,
+                  ),
+                  const SizedBox(height: 18),
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: const InputDecoration(labelText: 'User Name'),
+                  ),
+                  const SizedBox(height: 18),
+                  TextFormField(
+                    controller: _websiteController,
+                    decoration: const InputDecoration(labelText: 'Website'),
+                  ),
+                  const SizedBox(height: 18),
+                  ElevatedButton(
+                    onPressed: _loading ? null : _updateProfile,
+                    child: Text(_loading ? 'Saving...' : 'Update'),
+                  ),
+                  const SizedBox(height: 18),
+                  TextButton(
+                      onPressed: _signOut, child: const Text('Sign Out')),
+                ],
+              ),
+        /* 
         child:Column(children: [
           DrawerHeader(
               decoration: const BoxDecoration(
                 color: Colors.blue,
               ),
-              child: Row(children: [Text(
-                'Drawer Header',
-                style: const TextStyle(
+              child: Row(children: [const Text(
+                'Infos de profil',
+                style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
-                ),Avatar(
-                  imageUrl: _avatarUrl,
-                 //  onUpload: _onUpload,
-                )
-              ),],
-            ),],)
-      ),
-      body: _loading
-          ? const Center(child: CircularProgressIndicator.adaptive())
-          : ListView(
-              padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
-              children: [
+                ),),
                 Avatar(
                   imageUrl: _avatarUrl,
-                  onUpload: _onUpload,
+                 //  onUpload: _onUpload,
                 ),
-                const SizedBox(height: 18),
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: const InputDecoration(labelText: 'User Name'),
-                ),
-                const SizedBox(height: 18),
-                TextFormField(
-                  controller: _websiteController,
-                  decoration: const InputDecoration(labelText: 'Website'),
-                ),
-                const SizedBox(height: 18),
-                ElevatedButton(
-                  onPressed: _loading ? null : _updateProfile,
-                  child: Text(_loading ? 'Saving...' : 'Update'),
-                ),
-                const SizedBox(height: 18),
-                TextButton(onPressed: _signOut, child: const Text('Sign Out')),
               ],
-            ),
+            ),),],
+      ),  */
+      ),
     );
   }
 }
